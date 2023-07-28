@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -37,7 +38,7 @@ int main (int argc, char *argv[]) {
 	if (q == -1)
 		perror("greska pri otvaranju reda"), exit(EXIT_FAILURE);
 	//---------slanje poruke--------------
-	if ( mq_send(q, argv[2], sizeof(argv[2]), (unsigned int) atoi(argv[3])) == -1 )
+	if ( mq_send(q, argv[2], strlen(argv[2]), (unsigned int) atoi(argv[3])) == -1 )
 		perror("greska pri slanju poruke"), exit(EXIT_FAILURE);
 
 	mq_close(q);
