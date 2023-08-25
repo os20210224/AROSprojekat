@@ -6,15 +6,14 @@
 #include <sys/stat.h>
 #include <mqueue.h>
 
-//./program /ime poruka prioritet
 int main (int argc, char *argv[]) {
-	//----podesavanje maksimanog proja poruka i duzine poruka----
+	//----podesavanje maksimalnog broja poruka i duzine poruka----
 	struct mq_attr atr;
 	atr.mq_msgsize = 100;
 	atr.mq_maxmsg = 10;
 	//-------provera ulaznih parametara-------------------------
 	if (argc != 4) {
-		printf("\tProgram se poziva u sledecem formatu:\n\n\t./ime_programa /ime_reda poruka prioritet\n");
+		printf("\tProgram se poziva u sledecem formatu:\n\n\t./ime_procesa /ime_reda sadrzaj_poruke prioritet\n");
                 exit(EXIT_FAILURE);
 	}
 	if (sizeof(argv[1]) > 256) {
@@ -22,7 +21,7 @@ int main (int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	if (argv[1][0] != '/') {
-		printf("\tIme reda mora poceti sa \"/\"\n");
+		printf("\tIme reda mora poceti sa kosom crtom \"/\"\n");
                 exit(EXIT_FAILURE);
 	}
 	if (sizeof(argv[2]) > atr.mq_msgsize) {
@@ -30,7 +29,7 @@ int main (int argc, char *argv[]) {
                 exit(EXIT_FAILURE);
 	}
 	if (atoi(argv[3]) > 31 || atoi(argv[3]) < 0) {
-		printf("\tPrioritet poruka je u opsegu 0-31\n");
+		printf("\tPrioritet poruka je integer vrednost u opsegu 0-31\n");
                 exit(EXIT_FAILURE);
 	}
 	//----------otvaranje reda------------

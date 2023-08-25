@@ -5,11 +5,10 @@
 #include <sys/stat.h>
 #include <mqueue.h>
 
-//./ime_programa /red
 int main (int argc, char *argv[]) {
-	//--------provera ulaznih aprametara-----------
+	//--------provera ulaznih parametara-----------
 	if (argc != 2) {
-                printf("\tProgram se poziva u sledecem formatu:\n\n\t./ime_programa /ime_reda\n");
+                printf("\tProgram se poziva u sledecem formatu:\n\n\t./ime_procesa /ime_reda\n");
                 exit(EXIT_FAILURE);
         }
         if (sizeof(argv[1]) > 256) {
@@ -17,7 +16,7 @@ int main (int argc, char *argv[]) {
                 exit(EXIT_FAILURE);
         }
         if (argv[1][0] != '/') {
-                printf("\tIme reda mora poceti sa \"/\"\n");
+                printf("\tIme reda mora poceti sa kosom crtom \"/\"\n");
                 exit(EXIT_FAILURE);
         }
 	//-------otvaranje reda u rezimu citanja-----------
